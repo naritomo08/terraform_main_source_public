@@ -38,3 +38,13 @@ resource "aws_db_subnet_group" "this" {
     Name = "${local.vpc_name}-db-subnet"
   }
 }
+
+# cacheサブネットグループ追加
+
+resource "aws_elasticache_subnet_group" "this" {
+  name = "${local.vpc_name}-cache-subnet"
+
+  subnet_ids = [
+    for s in aws_subnet.private : s.id
+  ]
+}

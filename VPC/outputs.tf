@@ -43,3 +43,9 @@ output "security_group_web_id" {
 output "db_subnet_group_this_id" {
   value = aws_db_subnet_group.this.id
 }
+
+## cache用サブネットグループ出力
+
+output "elasticache_subnet_group_this_name" {
+  value = aws_elasticache_subnet_group.this.name
+}
