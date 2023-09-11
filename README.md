@@ -227,6 +227,8 @@ sudo yum -y install nc
 
 ## RDS/CACHE用CNAME（db．awsvpc．internal/cache.awsvpc.internal）作成
 
+VPC/IAM/PrivateEC2/RDS/CACHEを作成していること。
+
 CNAMEに入り、リソースを作成する。
 
 publicEC2に入り、以下のコマンドを入力してログインできることを確認する。
