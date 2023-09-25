@@ -63,7 +63,7 @@ EC2メニューのキーペアにて"serverkey"名でSSHセキュリティキー
 
 下記のフォルダ内へ順番入り、リソース作成を実施する。
 
-注> リソース作成前にすべての作業フォルダ内の"backend.tf"内にある<バケット名>部分を前の手順で設定した名前に変更すること。
+注> リソース作成前にすべての作業フォルダ内の"backend.tf","data.tf"内にある<バケット名>部分を前の手順で設定した名前に変更すること。
 
 * VPC(ネットワーク作成)
 * IAM(EC2アクセス用SSMポリシー作成)
@@ -243,3 +243,63 @@ RDS設定で指定したRDSパスワードを入力する。
 ```
 
 名前が引けない場合、EC2を再起動してリトライすること。
+
+## リソース情報抜き出し(terraform1.5以降で実施)
+
+参考URL:
+
+https://zenn.dev/ryoyoshii/articles/81a7cfc7140816
+
+privateEC2作成後に実施
+
+pri_vm01のインスタンスIDを確認する。コンソールまたは作成後のprivate_ec2_1_idの値を控える。
+
+ソースファイル編集する。
+
+```bash
+vi import.tf
+
+以下の日本語部分をIDに書き換える。
+
+import {
+  id = "<EC2リソースのID>"
+  to = aws_instance.source
+}
+```
+
+以下のコマンドを入力してファイル出力する。
+
+```bash
+terraform init
+terraform plan -generate-config-out=generated.tf
+```
+
+generated.tf内にプライベートEC2のリソースコードが出力されていることを確認する。
+
+＊エラーについては無視してよい。
+
+再使用する際は以下の加工を実施する。
+
+```bash
+ipv6_addressesについて、頭に#をつけてマスクする。
+
+最後に以下記載を追記する(インポートしたリソースを誤って操作してしまわないようにおまじない)
+  lifecycle {
+    ignore_changes = all
+  }
+```
+
+更に、プライベートIP,タグ名を書き換えてimport.tfの内容をすべてマスクしてplan/applyをするとEC2の追加が行える。
+
+TシリーズEC2についてはcpu_options部分もマスクしてください。
+
+他のリソースについては以下のページから確認できます。
+
+import.tfの内容を追記することにより別の取り出しできます。
+
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
+既存リソースから情報を取り出し対象のtfstateへ登録したい際は上記の加工を実施の上、
+適当なリソースフォルダに入れ、applyコマンド入れれば登録できます。
+
+手動作成したリソースをterraformへ登録したい場合にも利用できます。

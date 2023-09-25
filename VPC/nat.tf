@@ -3,7 +3,7 @@
 resource "aws_eip" "nat_gateway" {
   for_each = var.enable_nat_gateway ? local.nat_gateway_azs : {}
 
-  vpc = true
+  domain = "vpc"
 
   tags = {
     Name = "${local.vpc_name}-nat-eip-${each.key}"
