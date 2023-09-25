@@ -65,7 +65,7 @@ EC2メニューのキーペアにて"serverkey"名でSSHセキュリティキー
 
 注> リソース作成前にすべての作業フォルダ内の"backend.tf"内にある<バケット名>部分を前の手順で設定した名前に変更すること。
 
-* VPC(ネットワーク作成),IAM,privateEC2,publicEC2
+* VPC(ネットワーク作成)
 * IAM(EC2アクセス用SSMポリシー作成)
 * privateEC2(プライベートEC2)
 * publicEC2(パブリックEC2)
