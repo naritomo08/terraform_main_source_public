@@ -56,6 +56,9 @@ resource "aws_instance" "aws_priec2_1" {
   tags = {
     Name = "pri_vm01"
   }
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "aws_instance" "aws_priec2_2" {
@@ -75,6 +78,9 @@ resource "aws_instance" "aws_priec2_2" {
   }
   tags = {
     Name = "pri_vm02"
+  }
+  lifecycle {
+    ignore_changes = all
   }
 }
 

@@ -68,6 +68,9 @@ resource "aws_instance" "aws_ec2_1" {
   tags = {
     Name = "pub_vm01"
   }
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "aws_instance" "aws_ec2_2" {
@@ -86,5 +89,8 @@ resource "aws_instance" "aws_ec2_2" {
   iam_instance_profile = "SSM_apply_profile"
   tags = {
     Name = "pub_vm02"
+  }
+  lifecycle {
+    ignore_changes = all
   }
 }
