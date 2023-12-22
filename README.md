@@ -31,7 +31,7 @@ tfenv
 *terraform稼働コンテナを利用しない場合は必要
 ```
 
-### (コンテナ利用しない場合)指定バージョン(1.３.８)のterraformを導入する。
+### (コンテナ利用しない場合)指定バージョン(1.５．７)のterraformを導入する。
 
 ```bash
 tfenv install
@@ -42,8 +42,8 @@ tfenv install
 terraformを動かすフォルダ内にて、以下コマンドを稼働する。
 
 ```bash
-git clone git@github.com:naritomo08/terraform_main_source.git
-cd terraform_main_source
+git clone https://github.com/naritomo08/terraform_main_source_public.git
+cd terraform_main_source_public
 ```
 
 後にファイル編集などをして、git通知が煩わしいときは
