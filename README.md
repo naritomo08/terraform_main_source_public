@@ -244,6 +244,23 @@ RDS設定で指定したRDSパスワードを入力する。
 
 名前が引けない場合、EC2を再起動してリトライすること。
 
+## EFS作成
+
+privateEC2を作成していること。
+
+EC2にログインして以下のコマンドを入力してマウントする。
+
+```bash
+sudo yum install -y amazon-efs-utils
+sudo mkdir /mnt/efs
+sudo mount -t efs -o tls fs-xxxxx:/ /mnt/efs/
+echo 'fs-xxxxx:/ /mnt/efs efs tls,_netdev 0 0' | sudo tee -a /etc/fstab
+```
+
+fs-xxxxxはEFSID、マウント先(/mnt/efs)は適当な場所を指定する。
+
+4行目はEC2再起動してもマウント状況を維持するもののため、状況によっては設定しなくてもよい。
+
 ## リソース情報抜き出し(terraform1.5以降で実施)
 
 参考URL:
